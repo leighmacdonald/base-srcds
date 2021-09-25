@@ -19,7 +19,7 @@ tag_shell:
 image:
 	docker build -t $(LATEST_IMAGE) .
 
-publish: image
+publish:
 	docker push $(LATEST_IMAGE)
 
 run:
