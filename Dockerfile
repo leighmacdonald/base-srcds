@@ -11,7 +11,7 @@ ENV STEAMAPPID 232250
 ENV STEAMAPP tf
 ENV STEAMAPPDIR "${HOMEDIR}/${STEAMAPP}-dedicated"
 
-ENV METAMOD_VERSION 1.10
+ENV METAMOD_VERSION 1.11
 ENV SOURCEMOD_VERSION 1.10
 
 RUN set -x \
@@ -53,15 +53,15 @@ USER ${USER}
 WORKDIR ${HOMEDIR}
 
 RUN set -x \
-	&& wget https://github.com/SteamRE/DepotDownloader/releases/download/DepotDownloader_2.4.4/depotdownloader-2.4.4.zip \
-	&& unzip depotdownloader-2.4.4.zip \
+	&& wget https://github.com/SteamRE/DepotDownloader/releases/download/DepotDownloader_2.4.5/depotdownloader-2.4.5.zip \
+	&& unzip depotdownloader-2.4.5.zip \
 	&& mkdir -p "${STEAMAPPDIR}" \
 	&& dotnet ./DepotDownloader.dll -app "${STEAMAPPID}" -dir "${STEAMAPPDIR}" -max-downloads 16 -max-servers 32
 
 
 RUN set -x \
-	&& wget -qO- https://mms.alliedmods.net/mmsdrop/1.10/mmsource-1.10.7-git974-linux.tar.gz | tar xvzf - -C "${STEAMAPPDIR}/${STEAMAPP}" \
-	&& wget -qO- https://sm.alliedmods.net/smdrop/1.10/sourcemod-1.10.0-git6512-linux.tar.gz | tar xvzf - -C "${STEAMAPPDIR}/${STEAMAPP}"
+	&& wget -qO- https://mms.alliedmods.net/mmsdrop/1.11/mmsource-1.11.0-git1145-linux.tar.gz | tar xvzf - -C "${STEAMAPPDIR}/${STEAMAPP}" \
+	&& wget -qO- https://sm.alliedmods.net/smdrop/1.10/sourcemod-1.10.0-git6528-linux.tar.gz | tar xvzf - -C "${STEAMAPPDIR}/${STEAMAPP}"
 
 ENV SRCDS_FPSMAX=300 \
 	SRCDS_TICKRATE=66 \
