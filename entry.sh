@@ -8,7 +8,7 @@
 #        wget -qO- https://sm.alliedmods.net/smdrop/"${SOURCEMOD_VERSION}"/"${LATESTSM}" | tar xvzf - -C "${STEAMAPPDIR}/${STEAMAPP}"
 #fi
 
-wget -qO- "${DLURL}/master/cfg.tar.gz" | tar xvzf - -C "${STEAMAPPDIR}"
+# wget -qO- "${DLURL}/master/cfg.tar.gz" | tar xvzf - -C "${STEAMAPPDIR}"
 
 bash ./srcds_run -game "${STEAMAPP}" -console \
                         -usercon \
