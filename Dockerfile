@@ -61,7 +61,7 @@ RUN set -x \
 
 RUN set -x \
 	&& wget -qO- https://mms.alliedmods.net/mmsdrop/1.11/mmsource-1.11.0-git1145-linux.tar.gz | tar xvzf - -C "${STEAMAPPDIR}/${STEAMAPP}" \
-	&& wget -qO- https://sm.alliedmods.net/smdrop/1.10/sourcemod-1.10.0-git6528-linux.tar.gz | tar xvzf - -C "${STEAMAPPDIR}/${STEAMAPP}"
+	&& wget -qO- https://sm.alliedmods.net/smdrop/1.10/sourcemod-1.10.0-git6529-linux.tar.gz | tar xvzf - -C "${STEAMAPPDIR}/${STEAMAPP}"
 
 ENV SRCDS_FPSMAX=300 \
 	SRCDS_TICKRATE=66 \
@@ -80,6 +80,8 @@ ENV SRCDS_FPSMAX=300 \
 WORKDIR /home/steam
 USER root
 
+RUN mkdir ${STEAMAPPDIR}/tf/logs
+
 RUN chown -R "${USER}:${USER}" . && chmod -R 777 .
 USER ${USER}
 WORKDIR "${STEAMAPPDIR}"
@@ -88,7 +90,9 @@ CMD ["bash", "../entry.sh"]
 
 VOLUME ${STEAMAPPDIR}/tf/logs
 
-VOLUME ${STEAMAPPDIR}/tf/addons/sourcemod/data/sqlite
+VOLUME ${STEAMAPPDIR}/tf/addons/sourcemod/data
+
+VOLUME ${STEAMAPPDIR}/tf/addons/sourcemod/gamedata
 
 EXPOSE 27015/tcp 27015/udp 27020/udp
 
