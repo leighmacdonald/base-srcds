@@ -61,21 +61,21 @@ RUN set -x \
 
 RUN set -x \
 	&& wget -qO- https://mms.alliedmods.net/mmsdrop/1.11/mmsource-1.11.0-git1145-linux.tar.gz | tar xvzf - -C "${STEAMAPPDIR}/${STEAMAPP}" \
-	&& wget -qO- https://sm.alliedmods.net/smdrop/1.10/sourcemod-1.10.0-git6528-linux.tar.gz | tar xvzf - -C "${STEAMAPPDIR}/${STEAMAPP}"
+	&& wget -qO- https://sm.alliedmods.net/smdrop/1.10/sourcemod-1.10.0-git6536-linux.tar.gz | tar xvzf - -C "${STEAMAPPDIR}/${STEAMAPP}"
 
 ENV SRCDS_FPSMAX=300 \
 	SRCDS_TICKRATE=66 \
 	SRCDS_PORT=27015 \
 	SRCDS_TV_PORT=27020 \
-        SRCDS_NET_PUBLIC_ADDRESS="" \
-        SRCDS_IP="" \
+    SRCDS_NET_PUBLIC_ADDRESS="" \
+    SRCDS_IP="" \
 	SRCDS_MAXPLAYERS=32 \
 	SRCDS_TOKEN="" \
 	SRCDS_RCONPW="changeme" \
 	SRCDS_PW="" \
 	SRCDS_STARTMAP="ctf_2fort" \
 	SRCDS_REGION=3 \
-        SRCDS_HOSTNAME="TF2"
+    SRCDS_HOSTNAME="TF2"
 
 WORKDIR /home/steam
 USER root
