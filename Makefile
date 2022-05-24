@@ -1,7 +1,8 @@
-LAST_TAG_COMMIT = $(shell git rev-list --tags --max-count=1)
-LAST_TAG = $(shell git describe --tags $(LAST_TAG_COMMIT) )
-TAGGED_IMAGE = leighmacdonald/base-srcds:$(LAST_TAG)
+BRANCH := $(shell git rev-parse --abbrev-ref HEAD)
+HASH := $(shell git rev-parse HEAD)
+TAGGED_IMAGE = leighmacdonald/base-srcds:$(BRANCH)
 LATEST_IMAGE = leighmacdonald/base-srcds:latest
+
 all: image
 
 tag_image:
