@@ -1,6 +1,7 @@
 FROM debian:buster-slim
 
 LABEL maintainer="leigh.macdonald@gmail.com"
+LABEL org.opencontainers.image.source="https://github.com/leighmacdonald/base-srcds"
 
 ARG PUID=1000
 
@@ -57,11 +58,11 @@ RUN set -x \
 	&& unzip depotdownloader-2.4.5.zip \
 	&& mkdir -p "${STEAMAPPDIR}" \
 	&& dotnet ./DepotDownloader.dll -app "${STEAMAPPID}" -dir "${STEAMAPPDIR}" -max-downloads 16 -max-servers 32
-
-# https://sm.alliedmods.net/smdrop/1.10/sourcemod-1.10.0-git6536-linux.tar.gz
+	
+# https://github.com/leighmacdonald/sourcemod/releases/download/sourcemod-1.7.2/ut-sourcemod.tar.gz
 RUN set -x \
 	&& wget -qO- https://mms.alliedmods.net/mmsdrop/1.11/mmsource-1.11.0-git1145-linux.tar.gz | tar xvzf - -C "${STEAMAPPDIR}/${STEAMAPP}" \
-	&& wget -qO- https://github.com/leighmacdonald/sourcemod/releases/download/sourcemod-1.7.2/ut-sourcemod.tar.gz | tar xvzf - -C "${STEAMAPPDIR}/${STEAMAPP}"
+	&& wget -qO- https://sm.alliedmods.net/smdrop/1.10/sourcemod-1.10.0-git6536-linux.tar.gz | tar xvzf - -C "${STEAMAPPDIR}/${STEAMAPP}"
 
 ENV SRCDS_FPSMAX=300 \
 	SRCDS_TICKRATE=66 \
