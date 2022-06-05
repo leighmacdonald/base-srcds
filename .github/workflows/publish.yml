@@ -16,12 +16,7 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: set version
-      run: echo "TF2_VERSION=$(grep PatchVersion tf/steam.inf | cut -d'=' -f2)" >> $GITHUB_ENV
-
     - name: Build the base-srcds image
       run: |
-        docker build . --tag gchr.io/leighmacdonald/base-srcds:${{ env.TF2_VERSION }}
         docker build . --tag ghcr.io/leighmacdonald/base-srcds:${GITHUB_REF##*/}
-        docker push ghcr.io/leighmacdonald/base-srcds:${GITHUB_REF##*/}
         docker push gchr.io/leighmacdonald/base-srcds:${GITHUB_REF##*/}
