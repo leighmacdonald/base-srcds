@@ -16,7 +16,10 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Build the base-srcds image
+    - name: Build base-srcds image
       run: |
         docker build . --tag ghcr.io/leighmacdonald/base-srcds:${GITHUB_REF##*/}
+
+    - name: Publish base-srcds image
+      run: |
         docker push gchr.io/leighmacdonald/base-srcds:${GITHUB_REF##*/}
