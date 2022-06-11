@@ -35,7 +35,7 @@ RUN set -x \
 	&& rm packages-microsoft-prod.deb \
 	&& apt-get update \
         && apt-get install -y --no-install-recommends --no-install-suggests \
-                aspnetcore-runtime-5.0 \
+                aspnetcore-runtime-6.0 \
                 unzip \
                 ca-certificates \
                 lib32z1 \
@@ -54,15 +54,14 @@ USER ${USER}
 WORKDIR ${HOMEDIR}
 
 RUN set -x \
-	&& wget https://github.com/SteamRE/DepotDownloader/releases/download/DepotDownloader_2.4.5/depotdownloader-2.4.5.zip \
-	&& unzip depotdownloader-2.4.5.zip \
+	&& wget https://github.com/SteamRE/DepotDownloader/releases/download/DepotDownloader_2.4.6/depotdownloader-2.4.6.zip \
+	&& unzip depotdownloader-2.4.6.zip \
 	&& mkdir -p "${STEAMAPPDIR}" \
 	&& dotnet ./DepotDownloader.dll -app "${STEAMAPPID}" -dir "${STEAMAPPDIR}" -max-downloads 16 -max-servers 32
 	
-# https://github.com/leighmacdonald/sourcemod/releases/download/sourcemod-1.7.2/ut-sourcemod.tar.gz
 RUN set -x \
 	&& wget -qO- https://mms.alliedmods.net/mmsdrop/1.11/mmsource-1.11.0-git1145-linux.tar.gz | tar xvzf - -C "${STEAMAPPDIR}/${STEAMAPP}" \
-	&& wget -qO- https://sm.alliedmods.net/smdrop/1.10/sourcemod-1.10.0-git6536-linux.tar.gz | tar xvzf - -C "${STEAMAPPDIR}/${STEAMAPP}"
+	&& wget -qO- https://sm.alliedmods.net/smdrop/1.10/sourcemod-1.10.0-git6540-linux.tar.gz | tar xvzf - -C "${STEAMAPPDIR}/${STEAMAPP}"
 
 ENV SRCDS_FPSMAX=300 \
 	SRCDS_TICKRATE=66 \
@@ -90,6 +89,6 @@ CMD ["bash", "../entry.sh"]
 VOLUME ${STEAMAPPDIR}/tf/logs
 
 VOLUME ${STEAMAPPDIR}/tf/addons/sourcemod/data/sqlite
-
+VOLUME ${STEAMAPPDIR}/tf/stv_demos
 EXPOSE 27015/tcp 27015/udp 27020/udp
 
